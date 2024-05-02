@@ -23,9 +23,9 @@ export const RegionSelect = () => {
   return (
     <Select
       value={region}
-      onChange={(value) => setRegion(value)}
-      title="Filtro por região"
       options={options}
+      title="Filtro por região"
+      onChange={(value) => setRegion(value)}
     />
   );
 };

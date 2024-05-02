@@ -2,7 +2,7 @@ import { Container } from "@/components/Container";
 import { CountryCard } from "@/components/CountryCard";
 import { useCountryList } from "@/hooks/country-list/useCountryList";
 import { useEffect } from "react";
-import { ListWrapper } from "./styles";
+import { FilterWrapper, ListWrapper } from "./styles";
 import { Loading } from "@/components/Loading";
 import { RegionSelect } from "./components/RegionSelect";
 
@@ -16,7 +16,11 @@ export const CountryList = () => {
   return (
     <Container>
       <Loading isVisible={isLoading} />
-      <RegionSelect />
+
+      <FilterWrapper>
+        <div />
+        <RegionSelect />
+      </FilterWrapper>
 
       <ListWrapper>
         {countries.map((country) => (
