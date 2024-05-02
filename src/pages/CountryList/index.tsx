@@ -4,8 +4,9 @@ import { useCountryList } from "@/hooks/country-list/useCountryList";
 import { useEffect } from "react";
 import { ListWrapper } from "./styles";
 import { Loading } from "@/components/Loading";
+import { RegionSelect } from "./components/RegionSelect";
 
-export const CountryList = () => { 
+export const CountryList = () => {
   const { fetchData, isLoading, countries } = useCountryList();
 
   useEffect(() => {
@@ -15,10 +16,12 @@ export const CountryList = () => {
   return (
     <Container>
       <Loading isVisible={isLoading} />
+      <RegionSelect />
+
       <ListWrapper>
         {countries.map((country) => (
           <CountryCard
-            data-testid={'country-item'}
+            data-testid={"country-item"}
             key={country.flags.svg}
             name={country.translations.por.common}
             capital={country.capital?.[0]}
