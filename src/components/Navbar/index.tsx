@@ -1,10 +1,14 @@
+import { Container } from "../Container";
 import { Typograph } from "../Typograph";
-import { NavbarWrapper } from "./styles";
 
 export const Navbar = () => {
   return (
-    <NavbarWrapper>
-      <Typograph data-testid="title" variant="h1">Em que parte do mundo?</Typograph>
-    </NavbarWrapper>
+    <div style={{ backgroundColor: "var(--color-2)" }}>
+      <Container padding="1.5rem">
+        <Typograph data-testid="title" variant="h1">
+          Em que parte do mundo?
+        </Typograph>
+      </Container>
+    </div>
   );
 };
