@@ -5,7 +5,18 @@ export const Anchor = styled.div({
   background: "#2a3743",
   borderRadius: "6px",
   cursor: "pointer",
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  justifyContent: 'space-between'
 });
+
+export const CloseIconWrapper = styled.button({
+  padding: 0,
+  border: 0,
+  background: 'none',
+  cursor: 'pointer'
+})
 
 export const OptionWrapper = styled.ul<{
   display: CSSProperties["display"];

@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from "react";
+import { FC, MouseEvent, useMemo, useState } from "react";
 import { Typograph } from "../Typograph";
 import { SelectOptionType } from "@/types/select";
 import {
@@ -6,13 +6,15 @@ import {
   OptionItem,
   OptionWrapper,
   BackgroundOptionWrapper,
+  CloseIconWrapper,
 } from "./styles";
 import { testIds } from "./testIds";
+import closeIcon from "@/assets/close-icon.svg";
 
 type Props = {
   title: string;
   value: null | string;
-  onChange(value: string): void;
+  onChange(value: Props["value"]): void;
   options: SelectOptionType[];
 };
 
@@ -27,10 +29,10 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
   const containsDuplicateOptions = useMemo(() => {
     const values = options.map((option) => option.value);
     const uniqueValues = new Set(values);
-    const isInvalid = values.length !== uniqueValues.size
+    const isInvalid = values.length !== uniqueValues.size;
 
     if (isInvalid) {
-      console.error('options duplicated!');
+      console.error("options duplicated!");
     }
 
     return isInvalid;
@@ -38,7 +40,12 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
 
   const onClose = () => setShow(false);
 
-  if (containsDuplicateOptions) return null
+  const clearValue = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    onChange(null);
+  };
+
+  if (containsDuplicateOptions) return null;
 
   return (
     <div
@@ -46,6 +53,11 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
     >
       <Anchor data-testid={testIds.anchor} onClick={() => setShow(!show)}>
         <Typograph>{optionSelected?.legend ?? title}</Typograph>
+        {value?.length && (
+          <CloseIconWrapper onClick={clearValue}>
+            <img src={closeIcon} alt="close icon" height={20} width={20} />
+          </CloseIconWrapper>
+        )}
       </Anchor>
 
       <BackgroundOptionWrapper

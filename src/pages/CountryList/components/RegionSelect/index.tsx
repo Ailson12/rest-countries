@@ -19,7 +19,7 @@ export const RegionSelect = () => {
     },
     {
       legend: "Europa",
-      value: "europa",
+      value: "europe",
     },
     {
       legend: "Oceania",
