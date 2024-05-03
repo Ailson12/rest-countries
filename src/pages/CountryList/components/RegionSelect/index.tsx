@@ -1,24 +1,31 @@
 import { Select } from "@/components/Select";
+import { useCountryFilterStore } from "@/store/country-filter.store";
 import { SelectOptionType } from "@/types/select";
-import { useState } from "react";
 
 export const RegionSelect = () => {
+  const { region, setRegion } = useCountryFilterStore()
   const options = [
     {
-      legend: "Africa",
+      legend: "África",
       value: "africa",
     },
     {
-      legend: "America",
+      legend: "América",
       value: "america",
+    },
+    {
+      legend: "Ásia",
+      value: "asia",
     },
     {
       legend: "Europa",
       value: "europa",
     },
+    {
+      legend: "Oceania",
+      value: "oceania",
+    },
   ] satisfies SelectOptionType[];
-
-  const [region, setRegion] = useState("");
 
   return (
     <Select

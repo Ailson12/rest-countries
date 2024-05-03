@@ -11,7 +11,7 @@ import { testIds } from "./testIds";
 
 type Props = {
   title: string;
-  value: string;
+  value: null | string;
   onChange(value: string): void;
   options: SelectOptionType[];
 };

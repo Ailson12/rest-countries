@@ -1,6 +1,7 @@
 import { CountryType } from "@/types/coutry";
 import { useCallback, useState } from "react";
 import { getAllCountry } from "@/services/country/getAllCountry.service";
+import { getAllCountryByRegion } from "@/services/country/getAllCountryByRegion.service";
 
 export const useCountryList = () => {
   const [countries, setCountries] = useState<CountryType[]>([])
@@ -13,9 +14,17 @@ export const useCountryList = () => {
       .finally(() => setIsLoading(false))
   }, [])
 
+  const fetchDataByRegion = useCallback((region: string) => {
+    setIsLoading(true)
+    return getAllCountryByRegion(region)
+      .then((data) => setCountries(data))
+      .finally(() => setIsLoading(false))
+  }, [])
+
   return {
     countries,
     isLoading,
-    fetchData
+    fetchData,
+    fetchDataByRegion
   }
 }

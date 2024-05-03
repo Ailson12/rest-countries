@@ -5,22 +5,28 @@ import { useEffect } from "react";
 import { FilterWrapper, ListWrapper } from "./styles";
 import { Loading } from "@/components/Loading";
 import { RegionSelect } from "./components/RegionSelect";
+import { useCountryFilterStore } from "@/store/country-filter.store";
 
 export const CountryList = () => {
-  const { fetchData, isLoading, countries } = useCountryList();
+  const { region } = useCountryFilterStore()
+  const { fetchData, fetchDataByRegion, isLoading, countries } = useCountryList();
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (region?.length) {
+      fetchDataByRegion(region)
+    } else {
+      fetchData();
+    }
+  }, [region, fetchData, fetchDataByRegion]);
 
   return (
     <Container>
-      <Loading isVisible={isLoading} />
-
       <FilterWrapper>
         <div />
         <RegionSelect />
       </FilterWrapper>
+
+      <Loading isVisible={isLoading} />
 
       <ListWrapper>
         {countries.map((country) => (
