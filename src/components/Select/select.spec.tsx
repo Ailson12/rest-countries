@@ -25,7 +25,7 @@ type Props = {
 }
 
 const Wrapper = ({ options = defaultOptions }: Props) => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState<string | null>(null);
 
   return (
     <Select
@@ -123,4 +123,43 @@ describe("Select - Component", () => {
 
     expect(display).toEqual('none')
   });
+
+  it('no clear icon should appear if no option is selected', () => {
+    render(<Wrapper />);
+    const icon = screen.queryByAltText('close icon')
+    expect(icon).toBeNull()
+  })
+
+  it('an icon should appear to clear the value when an option is selected', async () => {
+    render(<Wrapper />);
+
+    const anchor = await screen.findByTestId(testIds.anchor);
+    fireEvent.click(anchor)
+
+    const { legend } = defaultOptions[0];
+    const optionElement = await screen.findByText(legend);
+
+    fireEvent.click(optionElement);
+
+    const icon = screen.queryByAltText('close icon')
+    expect(icon).toBeTruthy()
+  })
+
+  it('should return to the initial title when an option is selected', async () => {
+    render(<Wrapper />);
+    
+    const anchor = await screen.findByTestId(testIds.anchor);
+    fireEvent.click(anchor)
+
+    const { legend } = defaultOptions[0];
+    const optionElement = await screen.findByText(legend);
+
+    fireEvent.click(optionElement);
+
+    const icon = await screen.findByAltText('close icon')
+    fireEvent.click(icon)
+
+    const firstChild = anchor.children.item(0)
+    expect(firstChild?.textContent).toEqual('Users')
+  })
 });
