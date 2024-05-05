@@ -1,7 +1,8 @@
+import { RegionEnum } from "@/enums/RegionEnum";
 import { create } from "zustand";
 
 type State = {
-  region: string | null
+  region: RegionEnum | null
   setRegion(value: State['region']): void
 }
 

@@ -1,4 +1,5 @@
 import { Select } from "@/components/Select";
+import { RegionEnum } from "@/enums/RegionEnum";
 import { useCountryFilterStore } from "@/store/country-filter.store";
 import { SelectOptionType } from "@/types/select";
 
@@ -7,23 +8,23 @@ export const RegionSelect = () => {
   const options = [
     {
       legend: "África",
-      value: "africa",
+      value: RegionEnum.AFRICA,
     },
     {
       legend: "América",
-      value: "america",
+      value: RegionEnum.AMERICA,
     },
     {
       legend: "Ásia",
-      value: "asia",
+      value: RegionEnum.ASIA,
     },
     {
       legend: "Europa",
-      value: "europe",
+      value: RegionEnum.EUROPE,
     },
     {
       legend: "Oceania",
-      value: "oceania",
+      value: RegionEnum.OCEANIA,
     },
   ] satisfies SelectOptionType[];
 
@@ -32,7 +33,7 @@ export const RegionSelect = () => {
       value={region}
       options={options}
       title="Filtro por região"
-      onChange={(value) => setRegion(value)}
+      onChange={(value) => setRegion(value as RegionEnum)}
     />
   );
 };

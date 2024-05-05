@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { act, renderHook } from '@testing-library/react'
 import { useCountryList } from "./useCountryList";
+import { RegionEnum } from "@/enums/RegionEnum";
 
 describe('Contry List - Hook', () => {
   it('the list of countries must start empty', () => {
@@ -22,5 +23,14 @@ describe('Contry List - Hook', () => {
     await act(() => fetchData())
 
     expect(result.current.countries).toHaveLength(2)
+  })
+
+  it('should populate the countries variable when searching for data by region', async () => {
+    const { result } = renderHook(useCountryList)
+    const { fetchDataByRegion } = result.current
+    
+    await act(() => fetchDataByRegion(RegionEnum.EUROPE))
+
+    expect(result.current.countries).toHaveLength(3)
   })
 })

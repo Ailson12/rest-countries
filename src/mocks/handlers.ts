@@ -32,4 +32,47 @@ export const handlers = [
       }
     ])
   }),
+  http.get(`${import.meta.env.VITE_API_URL}/region/*`, () => {
+    return HttpResponse.json([
+      {
+        capital: ['Mamoudzou'],
+        region: 'Africa',
+        population: 226915,
+        flags: {
+          svg: 'https://flagcdn.com/yt.svg'
+        },
+        translations: {
+          por: {
+            common: 'Mayotte'
+          }
+        }
+      },
+      {
+        capital: ['Maputo'],
+        region: 'Africa',
+        population: 31255435,
+        flags: {
+          svg: 'https://flagcdn.com/mz.svg'
+        },
+        translations: {
+          por: {
+            common: 'Moçambique'
+          }
+        }
+      },
+      {
+        capital: ['Praia'],
+        region: 'Africa',
+        population: 555988,
+        flags: {
+          svg: 'https://flagcdn.com/cv.svg'
+        },
+        translations: {
+          por: {
+            common: 'Cabo Verde'
+          }
+        }
+      },
+    ])
+  })
 ]
