@@ -1,19 +1,21 @@
-import { Container } from "@/components/Container";
-import { CountryCard } from "@/components/CountryCard";
-import { useCountryList } from "@/hooks/country-list/useCountryList";
 import { useEffect } from "react";
-import { FilterWrapper, ListWrapper } from "./styles";
+import { Input } from "@/components/Input";
 import { Loading } from "@/components/Loading";
+import { Container } from "@/components/Container";
+import { FilterWrapper, ListWrapper } from "./styles";
+import { CountryCard } from "@/components/CountryCard";
 import { RegionSelect } from "./components/RegionSelect";
+import { useCountryList } from "@/hooks/country-list/useCountryList";
 import { useCountryFilterStore } from "@/store/country-filter.store";
 
 export const CountryList = () => {
-  const { region } = useCountryFilterStore()
-  const { fetchData, fetchDataByRegion, isLoading, countries } = useCountryList();
+  const { region } = useCountryFilterStore();
+  const { fetchData, countryName, fetchDataByRegion, isLoading, countries } =
+    useCountryList();
 
   useEffect(() => {
     if (region?.length) {
-      fetchDataByRegion(region)
+      fetchDataByRegion(region);
     } else {
       fetchData();
     }
@@ -22,7 +24,12 @@ export const CountryList = () => {
   return (
     <Container>
       <FilterWrapper>
-        <div />
+        <Input
+          value={countryName.value}
+          onChange={countryName.onChange}
+          placeholder="Procurar um país..."
+          maxWidth={300}
+        />
         <RegionSelect />
       </FilterWrapper>
 

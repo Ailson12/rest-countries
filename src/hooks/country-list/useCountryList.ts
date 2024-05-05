@@ -5,6 +5,7 @@ import { getAllCountryByRegion } from "@/services/country/getAllCountryByRegion.
 import { RegionEnum } from "@/enums/RegionEnum";
 
 export const useCountryList = () => {
+  const [countryName, setCountryName] = useState('')
   const [countries, setCountries] = useState<CountryType[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
@@ -26,6 +27,10 @@ export const useCountryList = () => {
     countries,
     isLoading,
     fetchData,
-    fetchDataByRegion
+    fetchDataByRegion,
+    countryName: {
+      value: countryName,
+      onChange: setCountryName
+    }
   }
 }
