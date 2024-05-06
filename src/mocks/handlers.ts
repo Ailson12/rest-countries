@@ -74,5 +74,22 @@ export const handlers = [
         }
       },
     ])
+  }),
+  http.get(`${import.meta.env.VITE_API_URL}/name/*`, () => {
+    return HttpResponse.json([
+      {
+        capital: ['Praia'],
+        region: 'Africa',
+        population: 555988,
+        flags: {
+          svg: 'https://flagcdn.com/cv.svg'
+        },
+        translations: {
+          por: {
+            common: 'Cabo Verde'
+          }
+        }
+      },
+    ])
   })
 ]

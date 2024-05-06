@@ -16,7 +16,7 @@ describe('Contry List - Hook', () => {
     expect(isLoading).toBe(false)
   })
 
-  it('the countries variable must be populated after the fetch', async () => {
+  it('should search all countries when there is no filter', async () => {
     const { result } = renderHook(useCountryList)
     const { fetchData } = result.current
 
@@ -25,11 +25,13 @@ describe('Contry List - Hook', () => {
     expect(result.current.countries).toHaveLength(2)
   })
 
-  it('should populate the countries variable when searching for data by region', async () => {
+  it('should search for countries by region when this field is filled in', async () => {
     const { result } = renderHook(useCountryList)
-    const { fetchDataByRegion } = result.current
+    const { fetchData } = result.current
     
-    await act(() => fetchDataByRegion(RegionEnum.EUROPE))
+    await act(() => fetchData({
+      region: RegionEnum.EUROPE
+    }))
 
     expect(result.current.countries).toHaveLength(3)
   })

@@ -10,16 +10,15 @@ import { useCountryFilterStore } from "@/store/country-filter.store";
 
 export const CountryList = () => {
   const { region } = useCountryFilterStore();
-  const { fetchData, countryName, fetchDataByRegion, isLoading, countries } =
-    useCountryList();
+  const { fetchData, countryName, isLoading, countries } = useCountryList();
 
   useEffect(() => {
-    if (region?.length) {
-      fetchDataByRegion(region);
-    } else {
-      fetchData();
-    }
-  }, [region, fetchData, fetchDataByRegion]);
+    fetchData({
+      ...(region && {
+        region: region,
+      }),
+    });
+  }, [region, fetchData]);
 
   return (
     <Container>
