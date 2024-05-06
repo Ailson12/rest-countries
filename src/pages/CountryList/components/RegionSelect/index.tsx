@@ -4,7 +4,7 @@ import { useCountryFilterStore } from "@/store/country-filter.store";
 import { SelectOptionType } from "@/types/select";
 
 export const RegionSelect = () => {
-  const { region, setRegion } = useCountryFilterStore()
+  const { region, setRegion, setName } = useCountryFilterStore();
   const options = [
     {
       legend: "África",
@@ -28,12 +28,17 @@ export const RegionSelect = () => {
     },
   ] satisfies SelectOptionType[];
 
+  const onChange = (value: string) => {
+    setRegion(value as RegionEnum);
+    setName("");
+  };
+
   return (
     <Select
       value={region}
       options={options}
       title="Filtro por região"
-      onChange={(value) => setRegion(value as RegionEnum)}
+      onChange={onChange}
     />
   );
 };

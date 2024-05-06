@@ -13,11 +13,27 @@ export const CountryList = () => {
   const { fetchData, countryName, isLoading, countries } = useCountryList();
 
   useEffect(() => {
-    fetchData({
-      ...(region && {
-        region: region,
-      }),
-    });
+    const containsFilter = region?.length ?? countryName.valueDebounced.length;
+    if (!containsFilter) {
+      fetchData();
+    }
+  }, [region, countryName.valueDebounced, fetchData]);
+
+  useEffect(() => {
+    const name = countryName.valueDebounced;
+    if (name?.length) {
+      fetchData({
+        name: name,
+      });
+    }
+  }, [countryName.valueDebounced, fetchData]);
+
+  useEffect(() => {
+    if (region?.length) {
+      fetchData({
+        region,
+      });
+    }
   }, [region, fetchData]);
 
   return (
