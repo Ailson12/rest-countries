@@ -14,7 +14,14 @@ body {
   font-family: "Nunito Sans", sans-serif;
 }
 
-ul {
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+ul,
+button {
   padding: 0;
 }
 

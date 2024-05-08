@@ -1,8 +1,9 @@
 import { FC, HTMLAttributes } from "react";
 import { Typograph } from "../Typograph";
 import { numberFormat } from "@/helpers/number-format.helper";
+import { useNavigate } from "react-router-dom";
 
-type Props = HTMLAttributes<HTMLDivElement> & {
+type Props = HTMLAttributes<HTMLButtonElement> & {
   name: string;
   image: {
     url: string;
@@ -20,6 +21,9 @@ export const CountryCard: FC<Props> = ({
   population,
   ...props
 }) => {
+  const navigate = useNavigate()
+
+  const redirectDetails = () => navigate('/detail/1')
   const generateMetaData = (key: string, value: string) => {
     return (
       <Typograph marginBottom={6} variant="body-2">
@@ -29,9 +33,10 @@ export const CountryCard: FC<Props> = ({
   };
 
   return (
-    <div
+    <button
       {...props}
       style={{ width: "max-content", backgroundColor: "#2a3743" }}
+      onClick={redirectDetails}
     >
       <img
         style={{
@@ -54,6 +59,6 @@ export const CountryCard: FC<Props> = ({
         {generateMetaData("Região", region)}
         {generateMetaData("Capital", capital)}
       </div>
-    </div>
+    </button>
   );
 };

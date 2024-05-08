@@ -1,10 +1,11 @@
-import { FC, HTMLAttributes, ReactNode } from "react";
+import { CSSProperties, FC, HTMLAttributes, ReactNode } from "react";
 
 type Props = HTMLAttributes<HTMLParagraphElement> & {
   children?: ReactNode;
   color?: string;
   variant?: "h1" | "h2" | "body" | "body-2";
   marginBottom?: string | number;
+  align?: CSSProperties['textAlign']
 };
 
 export const Typograph: FC<Props> = ({
@@ -12,6 +13,7 @@ export const Typograph: FC<Props> = ({
   color = "#fff",
   children,
   marginBottom,
+  align = 'start',
   ...props
 }) => {
   const getStyleByVariant = () => {
@@ -40,7 +42,7 @@ export const Typograph: FC<Props> = ({
   const style = getStyleByVariant();
 
   return (
-    <p {...props} style={{ ...style, marginBottom, color, ...props.style }}>
+    <p {...props} style={{ ...style, textAlign: align, marginBottom, color, ...props.style }}>
       {children}
     </p>
   );
