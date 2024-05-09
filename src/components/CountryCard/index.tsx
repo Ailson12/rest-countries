@@ -21,9 +21,9 @@ export const CountryCard: FC<Props> = ({
   population,
   ...props
 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const redirectDetails = () => navigate('/detail/1')
+  const redirectDetails = () => navigate("/detail/1");
   const generateMetaData = (key: string, value: string) => {
     return (
       <Typograph marginBottom={6} variant="body-2">

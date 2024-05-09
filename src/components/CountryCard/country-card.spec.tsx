@@ -2,6 +2,7 @@ import { CountryCard } from ".";
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { numberFormat } from "@/helpers/number-format.helper";
+import { MemoryRouter } from "react-router-dom";
 
 const makeComponent = () => {
   const image = {
@@ -18,7 +19,11 @@ const makeComponent = () => {
 
   return {
     props,
-    component: <CountryCard {...props} />,
+    component: (
+      <MemoryRouter>
+        <CountryCard {...props} />
+      </MemoryRouter>
+    ),
   };
 };
 
@@ -62,11 +67,11 @@ describe("Coutry Card", () => {
     expect(populationElement?.textContent).toEqual(formattedPopulation);
   });
 
-  it('should display the name of the country if the image is not loaded', async () => {
+  it("should display the name of the country if the image is not loaded", async () => {
     const { props, component } = makeComponent();
     render(component);
 
     const imageElement = await screen.findByRole<HTMLImageElement>("img");
-    expect(imageElement.alt).toEqual(props.name)
-  })
+    expect(imageElement.alt).toEqual(props.name);
+  });
 });

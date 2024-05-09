@@ -8,22 +8,23 @@ import { CoutryDetails } from "./pages/CoutryDetails";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
         index: true,
-        element: <CountryList />
+        element: <CountryList />,
       },
       {
-        path: '/detail/:id',
-        element: <CoutryDetails />
-      }
-    ]
-  }
-])
+        path: "/detail/:id",
+        element: <CoutryDetails />,
+      },
+    ],
+  },
+]);
 
-ReactDOM.createRoot(document.getElementById("root")!)
-.render(<React.StrictMode>
-  <RouterProvider router={router} />
-</React.StrictMode>);
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
