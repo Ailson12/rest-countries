@@ -1,31 +1,20 @@
 import { Button } from "@/components/Button";
-import { CountryType } from "@/types/coutry";
 import backIcon from "@/assets/back-icon.svg";
 import { Container } from "@/components/Container";
 import { Typograph } from "@/components/Typograph";
-import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ContentWrapper, MetaDataContainer } from "./styles";
 import { numberFormat } from "@/helpers/number-format.helper";
-import { getCountryByCcn3 } from "@/services/country/getCountryByCcn3.service";
 import { Loading } from "@/components/Loading";
+import { useCountryDetails } from "@/hooks/country-details/useCountryDetails";
+import { useEffect } from "react";
 
-export const CoutryDetails = () => {
+export const CountryDetails = () => {
   const { ccn3 } = useParams();
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
-  const [country, setCountry] = useState<CountryType | null>(null);
-
-  const fetchData = useCallback(() => {
-    if (ccn3) {
-      setLoading(true)
-      getCountryByCcn3(ccn3).then((data) => {
-        setCountry(data.at(0) ?? null);
-      })
-      .finally(() => setLoading(false));
-    }
-  }, [ccn3]);
+  const { country, fetchData, isLoading } = useCountryDetails({
+    ccn3,
+  });
 
   useEffect(() => {
     fetchData();
@@ -53,7 +42,7 @@ export const CoutryDetails = () => {
         Voltar
       </Button>
 
-      <Loading isVisible={loading} />
+      <Loading isVisible={isLoading} />
 
       {country && (
         <ContentWrapper>

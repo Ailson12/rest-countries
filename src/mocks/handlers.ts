@@ -2,12 +2,50 @@ import { CountryType } from '@/types/coutry'
 import { http, HttpResponse } from 'msw'
  
 export const handlers = [
+  http.get(`${import.meta.env.VITE_API_URL}/alpha/*`, () => {
+    return HttpResponse.json<CountryType[]>([
+      {
+        capital: ['Brasília'],
+        region: 'Americas',
+        population: 212559409,
+        ccn3: '071',
+        currencies: {
+          'por': {
+            name: 'Real',
+            symbol: 'R$'
+          }
+        },
+        languages: {
+          por: 'Portugues'
+        },
+        subregion: 'america',
+        flags: {
+          svg: 'https://flagcdn.com/br.svg'
+        },
+        translations: {
+          por: {
+            common: 'Brasil'
+          }
+        }
+      }])
+  }),
   http.get(`${import.meta.env.VITE_API_URL}/all`, () => {
     return HttpResponse.json<CountryType[]>([
       {
         capital: ['Brasília'],
         region: 'Americas',
         population: 212559409,
+        ccn3: '071',
+        currencies: {
+          'por': {
+            name: 'Real',
+            symbol: 'R$'
+          }
+        },
+        languages: {
+          por: 'Portugues'
+        },
+        subregion: 'america',
         flags: {
           svg: 'https://flagcdn.com/br.svg'
         },
@@ -18,6 +56,17 @@ export const handlers = [
         }
       },
       {
+        ccn3: '071',
+        currencies: {
+          'por': {
+            name: 'Real',
+            symbol: 'R$'
+          }
+        },
+        languages: {
+          por: 'Portugues'
+        },
+        subregion: 'america',
         capital: ['Washington, D.C.'],
         region: 'Americas',
         population: 329484123,

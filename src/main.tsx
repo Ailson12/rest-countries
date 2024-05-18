@@ -3,7 +3,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { CountryList } from "./pages/CountryList";
-import { CoutryDetails } from "./pages/CoutryDetails";
+import { CountryDetails } from "./pages/CoutryDetails";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/detail/:ccn3",
-        element: <CoutryDetails />,
+        element: <CountryDetails />,
       },
     ],
   },
