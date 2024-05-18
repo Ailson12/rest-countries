@@ -1,6 +1,6 @@
 import { CountryCard } from ".";
-import { describe, expect, it } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { numberFormat } from "@/helpers/number-format.helper";
 import { MemoryRouter } from "react-router-dom";
 
@@ -15,6 +15,7 @@ const makeComponent = () => {
     capital: "Brasília",
     region: "Americas",
     population: 1200,
+    ccn3: '076',
   };
 
   return {
@@ -26,6 +27,16 @@ const makeComponent = () => {
     ),
   };
 };
+
+// Mock do useNavigate
+const mockNavigate = vi.fn();
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 describe("Coutry Card", () => {
   it("should display the image of the country", async () => {
@@ -74,4 +85,15 @@ describe("Coutry Card", () => {
     const imageElement = await screen.findByRole<HTMLImageElement>("img");
     expect(imageElement.alt).toEqual(props.name);
   });
+
+  it('should redirect to a page with details of the selected country when any child element is clicked on', async () => {
+    const { props, component } = makeComponent();
+    render(component);
+
+    const imageElement = await screen.findByRole<HTMLImageElement>("img");
+    fireEvent.click(imageElement)
+
+    // checks if a function has been called at least once with certain parameters
+    expect(mockNavigate).toHaveBeenCalledWith(`/detail/${props.ccn3}`);
+  })
 });
