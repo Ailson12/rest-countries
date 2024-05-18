@@ -53,6 +53,7 @@ export const CountryList = () => {
       <ListWrapper>
         {countries.map((country) => (
           <CountryCard
+            ccn3={country.ccn3}
             data-testid={"country-item"}
             key={country.flags.svg}
             name={country.translations.por.common}

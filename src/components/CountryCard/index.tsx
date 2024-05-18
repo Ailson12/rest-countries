@@ -11,6 +11,7 @@ type Props = HTMLAttributes<HTMLButtonElement> & {
   population: number;
   region: string;
   capital: string;
+  ccn3: string
 };
 
 export const CountryCard: FC<Props> = ({
@@ -23,7 +24,7 @@ export const CountryCard: FC<Props> = ({
 }) => {
   const navigate = useNavigate();
 
-  const redirectDetails = () => navigate("/detail/1");
+  const redirectDetails = () => navigate(`/detail/${props.ccn3}`);
   const generateMetaData = (key: string, value: string) => {
     return (
       <Typograph marginBottom={6} variant="body-2">

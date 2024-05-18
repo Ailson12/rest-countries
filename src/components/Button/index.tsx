@@ -1,15 +1,14 @@
-import { FC, ReactElement, ReactNode } from "react";
+import { FC, HTMLAttributes, ReactElement, ReactNode } from "react";
 import { ButtonWrapper } from "./styles";
 
-type Props = {
+type Props = HTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   appendIcon?: ReactElement;
-  onClick?: () => void;
 };
 
-export const Button: FC<Props> = ({ onClick, appendIcon, children }) => {
+export const Button: FC<Props> = ({ appendIcon, children, ...props }) => {
   return (
-    <ButtonWrapper onClick={onClick}>
+    <ButtonWrapper {...props}>
       {appendIcon}
       {children}
     </ButtonWrapper>
