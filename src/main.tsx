@@ -3,7 +3,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { CountryList } from "./pages/CountryList";
-import { CountryDetails } from "./pages/CoutryDetails";
+import { CountryDetails } from "./pages/CountryDetails";
 
 const router = createBrowserRouter([
   {
