@@ -1,6 +1,7 @@
 :root {
   --color-1: #212c36;
-  --color-2: #2c3743;
+  --color-3: #2c3743;
+  /* #2a3743 */
 }
 
 body,
@@ -10,7 +11,6 @@ ul {
 }
 
 body {
-  background: var(--color-1);
   font-family: "Nunito Sans", sans-serif;
 }
 

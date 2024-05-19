@@ -4,7 +4,6 @@ export const InputWrapper = styled.div<{
   $maxWidth?: number;
 }>(
   {
-    background: "#2a3743",
     boxShadow: "rgb(33 44 54) 0px 8px 24px",
     borderRadius: 6,
     width: "100%",
@@ -27,7 +26,8 @@ export const InputWrapper = styled.div<{
       },
     },
   },
-  ({ $maxWidth }) => ({
+  ({ $maxWidth, theme }) => ({
+    background: theme.color.secondary.main,
     ...($maxWidth && {
       maxWidth: `${$maxWidth / 16}rem`,
     }),

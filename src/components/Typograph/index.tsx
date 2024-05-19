@@ -5,9 +5,9 @@ type Props = HTMLAttributes<HTMLParagraphElement> & {
   color?: string;
   variant?: "h1" | "h2" | "body" | "body-2";
   marginBottom?: string | number;
-  align?: CSSProperties['textAlign']
-  fontSize?: CSSProperties['fontSize']
-  fontWeight?: CSSProperties['fontWeight']
+  align?: CSSProperties["textAlign"];
+  fontSize?: CSSProperties["fontSize"];
+  fontWeight?: CSSProperties["fontWeight"];
 };
 
 export const Typograph: FC<Props> = ({
@@ -17,7 +17,7 @@ export const Typograph: FC<Props> = ({
   children,
   fontWeight,
   marginBottom,
-  align = 'start',
+  align = "start",
   ...props
 }) => {
   const getStyleByVariant = () => {
@@ -46,7 +46,17 @@ export const Typograph: FC<Props> = ({
   const style = getStyleByVariant();
 
   return (
-    <p {...props} style={{ ...style, fontWeight, fontSize, textAlign: align, marginBottom, color, ...props.style }}>
+    <p
+      {...props}
+      style={{
+        fontWeight: fontWeight ?? style.fontWeight,
+        fontSize: fontSize ?? style.fontSize,
+        textAlign: align,
+        marginBottom,
+        color,
+        ...props.style,
+      }}
+    >
       {children}
     </p>
   );

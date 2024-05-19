@@ -2,6 +2,7 @@ import { FC, HTMLAttributes } from "react";
 import { Typograph } from "../Typograph";
 import { numberFormat } from "@/helpers/number-format.helper";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
 
 type Props = HTMLAttributes<HTMLButtonElement> & {
   name: string;
@@ -11,7 +12,7 @@ type Props = HTMLAttributes<HTMLButtonElement> & {
   population: number;
   region: string;
   capital: string;
-  ccn3: string
+  ccn3: string;
 };
 
 export const CountryCard: FC<Props> = ({
@@ -22,13 +23,22 @@ export const CountryCard: FC<Props> = ({
   population,
   ...props
 }) => {
+  const { color } = useTheme();
   const navigate = useNavigate();
 
   const redirectDetails = () => navigate(`/detail/${props.ccn3}`);
   const generateMetaData = (key: string, value: string) => {
     return (
-      <Typograph marginBottom={6} variant="body-2">
-        {key}: <span style={{ color: "#b8bfc6" }}>{value}</span>
+      <Typograph
+        marginBottom={6}
+        variant="body-2"
+        fontWeight={400}
+        color={color.primary.contrastText}
+      >
+        {key}:{" "}
+        <span style={{ opacity: 0.7, color: color.primary.contrastText }}>
+          {value}
+        </span>
       </Typograph>
     );
   };
@@ -36,7 +46,12 @@ export const CountryCard: FC<Props> = ({
   return (
     <button
       {...props}
-      style={{ width: "max-content", backgroundColor: "#2a3743" }}
+      style={{
+        width: "max-content",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: color.secondary.main,
+      }}
       onClick={redirectDetails}
     >
       <img
@@ -52,6 +67,8 @@ export const CountryCard: FC<Props> = ({
         <Typograph
           style={{ maxWidth: "20ch", wordBreak: "break-word" }}
           variant="h2"
+          fontWeight={600}
+          color={color.primary.contrastText}
           marginBottom={12}
         >
           {name}
