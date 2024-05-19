@@ -1,15 +1,18 @@
-import { defineConfig } from 'vitest/config'
+import { coverageConfigDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: "jsdom",
     testTimeout: 8000,
-    setupFiles: './src/config/setupTests'
+    setupFiles: "src/config/setupTests",
+    coverage: {
+      exclude: [...coverageConfigDefaults.exclude, "src/router/index.tsx"],
+    },
   },
   resolve: {
     alias: {
-      '@': '/src'
-    }
-  }
-})
+      "@": "/src",
+    },
+  },
+});
