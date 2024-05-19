@@ -13,7 +13,7 @@ export const useCountryDetails = (params: Params = {}) => {
   const [country, setCountry] = useState<CountryType | null>(null);
 
   const fetchData = useCallback(() => {
-    if (!ccn3) return Promise.resolve();
+    if (!ccn3?.trim()) return Promise.resolve();
 
     setIsLoading(true);
     return getCountryByCcn3(ccn3)

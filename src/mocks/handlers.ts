@@ -1,144 +1,151 @@
-import { CountryType } from '@/types/coutry'
-import { http, HttpResponse } from 'msw'
- 
+import { CountryType } from "@/types/coutry";
+import { http, HttpResponse } from "msw";
+
 export const handlers = [
-  http.get(`${import.meta.env.VITE_API_URL}/alpha/*`, () => {
+  http.get(`${import.meta.env.VITE_API_URL}/alpha/:ccn3`, (path) => {
+    const { ccn3 = "" } = path.params;
+
+    if (ccn3.includes("invalid")) {
+      return HttpResponse.json([]);
+    }
+
     return HttpResponse.json<CountryType[]>([
       {
-        capital: ['Brasília'],
-        region: 'Americas',
+        capital: ["Brasília"],
+        region: "Americas",
         population: 212559409,
-        ccn3: '071',
+        ccn3: "071",
         currencies: {
-          'por': {
-            name: 'Real',
-            symbol: 'R$'
-          }
+          por: {
+            name: "Real",
+            symbol: "R$",
+          },
         },
         languages: {
-          por: 'Portugues'
+          por: "Portugues",
         },
-        subregion: 'america',
+        subregion: "america",
         flags: {
-          svg: 'https://flagcdn.com/br.svg'
+          svg: "https://flagcdn.com/br.svg",
         },
         translations: {
           por: {
-            common: 'Brasil'
-          }
-        }
-      }])
+            common: "Brasil",
+          },
+        },
+      },
+    ]);
   }),
   http.get(`${import.meta.env.VITE_API_URL}/all`, () => {
     return HttpResponse.json<CountryType[]>([
       {
-        capital: ['Brasília'],
-        region: 'Americas',
+        capital: ["Brasília"],
+        region: "Americas",
         population: 212559409,
-        ccn3: '071',
+        ccn3: "071",
         currencies: {
-          'por': {
-            name: 'Real',
-            symbol: 'R$'
-          }
+          por: {
+            name: "Real",
+            symbol: "R$",
+          },
         },
         languages: {
-          por: 'Portugues'
+          por: "Portugues",
         },
-        subregion: 'america',
+        subregion: "america",
         flags: {
-          svg: 'https://flagcdn.com/br.svg'
+          svg: "https://flagcdn.com/br.svg",
         },
         translations: {
           por: {
-            common: 'Brasil'
-          }
-        }
+            common: "Brasil",
+          },
+        },
       },
       {
-        ccn3: '071',
+        ccn3: "071",
         currencies: {
-          'por': {
-            name: 'Real',
-            symbol: 'R$'
-          }
+          por: {
+            name: "Real",
+            symbol: "R$",
+          },
         },
         languages: {
-          por: 'Portugues'
+          por: "Portugues",
         },
-        subregion: 'america',
-        capital: ['Washington, D.C.'],
-        region: 'Americas',
+        subregion: "america",
+        capital: ["Washington, D.C."],
+        region: "Americas",
         population: 329484123,
         flags: {
-          svg: 'https://flagcdn.com/us.svg'
+          svg: "https://flagcdn.com/us.svg",
         },
         translations: {
           por: {
-            common: 'Estados Unidos'
-          }
-        }
-      }
-    ])
+            common: "Estados Unidos",
+          },
+        },
+      },
+    ]);
   }),
   http.get(`${import.meta.env.VITE_API_URL}/region/*`, () => {
     return HttpResponse.json([
       {
-        capital: ['Mamoudzou'],
-        region: 'Africa',
+        capital: ["Mamoudzou"],
+        region: "Africa",
         population: 226915,
         flags: {
-          svg: 'https://flagcdn.com/yt.svg'
+          svg: "https://flagcdn.com/yt.svg",
         },
         translations: {
           por: {
-            common: 'Mayotte'
-          }
-        }
+            common: "Mayotte",
+          },
+        },
       },
       {
-        capital: ['Maputo'],
-        region: 'Africa',
+        capital: ["Maputo"],
+        region: "Africa",
         population: 31255435,
         flags: {
-          svg: 'https://flagcdn.com/mz.svg'
+          svg: "https://flagcdn.com/mz.svg",
         },
         translations: {
           por: {
-            common: 'Moçambique'
-          }
-        }
+            common: "Moçambique",
+          },
+        },
       },
       {
-        capital: ['Praia'],
-        region: 'Africa',
+        capital: ["Praia"],
+        region: "Africa",
         population: 555988,
         flags: {
-          svg: 'https://flagcdn.com/cv.svg'
+          svg: "https://flagcdn.com/cv.svg",
         },
         translations: {
           por: {
-            common: 'Cabo Verde'
-          }
-        }
+            common: "Cabo Verde",
+          },
+        },
       },
-    ])
+    ]);
   }),
   http.get(`${import.meta.env.VITE_API_URL}/name/*`, () => {
     return HttpResponse.json([
       {
-        capital: ['Praia'],
-        region: 'Africa',
+        capital: ["Praia"],
+        region: "Africa",
         population: 555988,
         flags: {
-          svg: 'https://flagcdn.com/cv.svg'
+          svg: "https://flagcdn.com/cv.svg",
         },
         translations: {
           por: {
-            common: 'Cabo Verde'
-          }
-        }
+            common: "Cabo Verde",
+          },
+        },
       },
-    ])
-  })
-]
+    ]);
+  }),
+];

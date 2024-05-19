@@ -25,4 +25,25 @@ describe("Contry Details - Hook", () => {
     await act(() => result.current.fetchData());
     expect(result.current.country).toBeTruthy();
   });
+
+  it("should not perform the search when the ccn3 parameter is empty", async () => {
+    const { result } = renderHook(useCountryDetails, {
+      initialProps: {
+        ccn3: "",
+      },
+    });
+
+    await act(() => result.current.fetchData());
+    expect(result.current.country).toBeNull();
+  });
+
+  it("should set a null value when the api can't find the country via ccn3", async () => {
+    const { result } = renderHook(useCountryDetails, {
+      initialProps: {
+        ccn3: "invalid",
+      },
+    });
+    await act(() => result.current.fetchData());
+    expect(result.current.country).toBeNull();
+  });
 });

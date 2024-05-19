@@ -46,7 +46,7 @@ export const CountryDetails = () => {
 
       {country && (
         <ContentWrapper>
-          <img width={400} height={200} src={country.flags.svg} alt="rest" />
+          <img width={400} height={200} src={country.flags.svg} alt="country" />
           <div>
             <Typograph fontSize={28} fontWeight={600} marginBottom={16}>
               {country.translations.por.common}
