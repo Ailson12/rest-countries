@@ -44,6 +44,17 @@ export const CountryDetails = () => {
 
       <Loading isVisible={isLoading} />
 
+      {!isLoading && !country && (
+        <Typograph
+          data-testid="message-not-found"
+          fontSize={"1.5rem"}
+          fontWeight={600}
+          align="center"
+        >
+          Ops... país não encontrado.
+        </Typograph>
+      )}
+
       {country && (
         <ContentWrapper>
           <img width={400} height={200} src={country.flags.svg} alt="country" />

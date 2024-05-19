@@ -8,9 +8,14 @@ import { describe, expect, it, vi } from "vitest";
 import { CountryDetails } from ".";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
-const makeComponent = () => {
+type Params = {
+  ccn3?: string;
+};
+
+const makeComponent = (params: Params = {}) => {
+  const { ccn3 = "071" } = params;
   return (
-    <MemoryRouter initialEntries={["/details/071"]}>
+    <MemoryRouter initialEntries={[`/details/${ccn3}`]}>
       <Routes>
         <Route path="details/:ccn3" element={<CountryDetails />} />
       </Routes>
@@ -58,5 +63,15 @@ describe("CountryDetails", () => {
     fireEvent.click(buttonIcon);
 
     expect(mockNavigate).toHaveBeenCalledWith("/");
+  });
+
+  it("should display a message if the country is not found", async () => {
+    render(
+      makeComponent({
+        ccn3: "invalid",
+      })
+    );
+
+    await screen.findByTestId("message-not-found");
   });
 });
