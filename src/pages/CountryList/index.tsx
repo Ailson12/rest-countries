@@ -23,7 +23,7 @@ export const CountryList = () => {
     const name = countryName.valueDebounced;
     if (name?.length) {
       fetchData({
-        name: name,
+        name,
       });
     }
   }, [countryName.valueDebounced, fetchData]);

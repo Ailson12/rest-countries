@@ -18,6 +18,10 @@ const makeComponent = () => {
   );
 };
 
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 describe("Country List - Component", () => {
   it("should show a load while the data is loaded and then disappear when finished", async () => {
     render(makeComponent());
@@ -50,5 +54,25 @@ describe("Country List - Component", () => {
 
     const countries = await screen.findAllByTestId("country-item");
     expect(countries).toHaveLength(3);
+  });
+
+  it("should filter by name when the user types in the input", async () => {
+    const { rerender } = render(makeComponent());
+    const nameInput = await screen.findByPlaceholderText(/procurar um país/i);
+
+    fireEvent.change(nameInput, {
+      target: {
+        value: "brazil",
+      },
+    });
+
+    // the delay is necessary to simulate the delay that is applied to the name filter
+    await act(async () => {
+      await sleep(500);
+      rerender(makeComponent());
+    });
+
+    const firstCountry = screen.getByTestId("country-item");
+    expect(firstCountry.textContent).toContain("Brasil");
   });
 });

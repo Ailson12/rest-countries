@@ -131,7 +131,38 @@ export const handlers = [
       },
     ]);
   }),
-  http.get(`${import.meta.env.VITE_API_URL}/name/*`, () => {
+  http.get(`${import.meta.env.VITE_API_URL}/name/:name`, (path) => {
+    const { name } = path.params;
+
+    if (name.includes("brazil")) {
+      return HttpResponse.json([
+        {
+          capital: ["Brasília"],
+          region: "Americas",
+          population: 212559409,
+          ccn3: "071",
+          currencies: {
+            por: {
+              name: "Real",
+              symbol: "R$",
+            },
+          },
+          languages: {
+            por: "Portugues",
+          },
+          subregion: "america",
+          flags: {
+            svg: "https://flagcdn.com/br.svg",
+          },
+          translations: {
+            por: {
+              common: "Brasil",
+            },
+          },
+        },
+      ]);
+    }
+
     return HttpResponse.json([
       {
         capital: ["Praia"],
