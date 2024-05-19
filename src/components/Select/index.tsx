@@ -63,7 +63,7 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
       <BackgroundOptionWrapper
         onClick={onClose}
         data-testid={testIds.backgroundOption}
-        position={show ? "fixed" : "initial"}
+        $position={show ? "fixed" : "initial"}
       />
 
       <OptionWrapper

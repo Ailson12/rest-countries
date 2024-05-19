@@ -54,7 +54,7 @@ export const OptionItem = styled.li<{
 );
 
 export const BackgroundOptionWrapper = styled.div<{
-  position: CSSProperties["position"];
+  $position: CSSProperties["position"];
 }>(
   {
     top: 0,
@@ -62,7 +62,7 @@ export const BackgroundOptionWrapper = styled.div<{
     right: 0,
     bottom: 0,
   },
-  ({ position }) => ({
-    position,
+  ({ $position }) => ({
+    position: $position,
   })
 );
