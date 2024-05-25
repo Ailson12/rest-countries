@@ -1,16 +1,20 @@
 import styled, { CSSProperties } from "styled-components";
 
-export const Anchor = styled.div({
-  padding: "0.875rem 1.25rem",
-  background: "#2a3743",
-  borderRadius: "6px",
-  cursor: "pointer",
-  display: "flex",
-  alignItems: "center",
-  gap: "0.5rem",
-  boxShadow: "rgb(33 44 54) 0px 8px 24px",
-  justifyContent: "space-between",
-});
+export const Anchor = styled.div(
+  {
+    padding: "0.875rem 1.25rem",
+    borderRadius: "6px",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    justifyContent: "space-between",
+  },
+  ({ theme }) => ({
+    background: theme.color.secondary.main,
+    border: `1px solid ${theme.border.cp1}`,
+  })
+);
 
 export const CloseIconWrapper = styled.button({
   padding: 0,
@@ -24,7 +28,6 @@ export const OptionWrapper = styled.ul<{
 }>(
   {
     boxShadow: "rgb(33 44 54) 0px 8px 24px",
-    background: "#2a3743",
     marginTop: 6,
     borderRadius: 6,
     position: "absolute",
@@ -32,8 +35,9 @@ export const OptionWrapper = styled.ul<{
     width: "100%",
     userSelect: "none",
   },
-  ({ display }) => ({
+  ({ display, theme }) => ({
     display,
+    background: theme.color.secondary.main,
   })
 );
 
@@ -44,11 +48,11 @@ export const OptionItem = styled.li<{
     cursor: "pointer",
     padding: "0.5rem 1.25rem",
     transition: "0.3s",
-    "&:hover": {
-      backgroundColor: "#3f5364",
-    },
   },
-  ({ $isActive }) => ({
+  ({ $isActive, theme }) => ({
+    "&:hover": {
+      background: theme.border.cp1,
+    },
     backgroundColor: $isActive ? "#3f5364" : "",
   })
 );

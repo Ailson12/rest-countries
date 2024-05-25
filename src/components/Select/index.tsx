@@ -10,6 +10,7 @@ import {
 } from "./styles";
 import { testIds } from "./testIds";
 import closeIcon from "@/assets/close-icon.svg";
+import { useTheme } from "styled-components";
 
 type Props = {
   title: string;
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export const Select: FC<Props> = ({ title, value, onChange, options }) => {
+  const theme = useTheme();
   const [show, setShow] = useState(false);
 
   const optionSelected = useMemo(
@@ -52,7 +54,9 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
       style={{ minWidth: "150px", position: "relative", width: "max-content" }}
     >
       <Anchor data-testid={testIds.anchor} onClick={() => setShow(!show)}>
-        <Typograph>{optionSelected?.legend ?? title}</Typograph>
+        <Typograph color={theme.color.primary.contrastText}>
+          {optionSelected?.legend ?? title}
+        </Typograph>
         {value?.length && (
           <CloseIconWrapper onClick={clearValue}>
             <img src={closeIcon} alt="close icon" height={20} width={20} />
@@ -79,7 +83,9 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
             }}
             key={option.value}
           >
-            <Typograph>{option.legend}</Typograph>
+            <Typograph color={theme.color.primary.contrastText}>
+              {option.legend}
+            </Typograph>
           </OptionItem>
         ))}
       </OptionWrapper>

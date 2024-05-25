@@ -1,13 +1,16 @@
 :root {
   --color-1: #212c36;
   --color-3: #2c3743;
-  /* #2a3743 */
 }
 
 body,
 p,
 ul {
   margin: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {

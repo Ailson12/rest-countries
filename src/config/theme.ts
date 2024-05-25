@@ -1,6 +1,9 @@
 import { DefaultTheme } from "styled-components";
 
 const light: DefaultTheme = {
+  border: {
+    cp1: "#cdcdcd",
+  },
   color: {
     primary: {
       main: "#ececec",
@@ -8,12 +11,15 @@ const light: DefaultTheme = {
     },
     secondary: {
       main: "#fff",
-      contrastText: "#959da533",
+      contrastText: "#696969",
     },
   },
 };
 
 const dark: DefaultTheme = {
+  border: {
+    cp1: "#535353",
+  },
   color: {
     primary: {
       main: "#212c36",
