@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { Input } from "./index";
 import { useState } from "react";
+import { renderSetup } from "@/helpers/render-setup.helper";
 
 const getAttributesByElement = (element: HTMLElement) => {
   return Array.from(element.attributes).reduce((acumulator, item) => {
@@ -12,12 +13,20 @@ const getAttributesByElement = (element: HTMLElement) => {
 
 const Wrapper = () => {
   const [value, setValue] = useState("");
-  return <Input placeholder="user" value={value} onChange={setValue} />;
+  return renderSetup({
+    component: <Input placeholder="user" value={value} onChange={setValue} />,
+  });
 };
 
 describe("Input", () => {
   it("should mount the component", () => {
-    expect(() => render(<Input />)).not.toThrow();
+    expect(() =>
+      render(
+        renderSetup({
+          component: <Input />,
+        })
+      )
+    ).not.toThrow();
   });
 
   it("should attach the properties correctly", async () => {
@@ -27,7 +36,11 @@ describe("Input", () => {
       placeholder: "Search users..",
     };
 
-    render(<Input {...originalAttributes} />);
+    render(
+      renderSetup({
+        component: <Input {...originalAttributes} />,
+      })
+    );
 
     const inputElement = await screen.findByPlaceholderText(
       originalAttributes.placeholder

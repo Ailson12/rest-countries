@@ -6,7 +6,8 @@ import {
 } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { CountryDetails } from ".";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { renderSetup } from "@/helpers/render-setup.helper";
 
 type Params = {
   ccn3?: string;
@@ -14,13 +15,18 @@ type Params = {
 
 const makeComponent = (params: Params = {}) => {
   const { ccn3 = "071" } = params;
-  return (
-    <MemoryRouter initialEntries={[`/details/${ccn3}`]}>
+
+  return renderSetup({
+    addMemoryRouter: true,
+    paramsMemoryRouter: {
+      initialEntries: [`/details/${ccn3}`],
+    },
+    component: (
       <Routes>
         <Route path="details/:ccn3" element={<CountryDetails />} />
       </Routes>
-    </MemoryRouter>
-  );
+    ),
+  });
 };
 
 // Mock do useNavigate

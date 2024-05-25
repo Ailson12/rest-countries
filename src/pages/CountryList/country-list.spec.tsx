@@ -8,14 +8,13 @@ import {
 import { describe, expect, it } from "vitest";
 import { CountryList } from "./index";
 import { testIds } from "@/components/Select/testIds";
-import { MemoryRouter } from "react-router-dom";
+import { renderSetup } from "@/helpers/render-setup.helper";
 
 const makeComponent = () => {
-  return (
-    <MemoryRouter>
-      <CountryList />
-    </MemoryRouter>
-  );
+  return renderSetup({
+    addMemoryRouter: true,
+    component: <CountryList />,
+  });
 };
 
 function sleep(ms: number) {
