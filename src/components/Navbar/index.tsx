@@ -9,12 +9,19 @@ export const Navbar = () => {
   const { color } = useTheme();
   const { setTheme, theme } = useThemeStore();
 
+  const toggleTheme = () => {
+    const { DARK, LIGHT } = ThemeEnum;
+    setTheme(theme === DARK ? LIGHT : DARK);
+  };
+
   return (
     <div style={{ backgroundColor: color.secondary.main }}>
       <Container
         padding="1.5rem"
         style={{
           display: "flex",
+          gap: "1rem",
+          flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
         }}
@@ -26,15 +33,7 @@ export const Navbar = () => {
         >
           Em que parte do mundo?
         </Typograph>
-        <Button
-          onClick={() => {
-            setTheme(
-              theme === ThemeEnum.DARK ? ThemeEnum.LIGHT : ThemeEnum.DARK
-            );
-          }}
-        >
-          Alterar tema
-        </Button>
+        <Button onClick={toggleTheme}>Alterar tema</Button>
       </Container>
     </div>
   );

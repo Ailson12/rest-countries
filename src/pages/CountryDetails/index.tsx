@@ -8,10 +8,13 @@ import { numberFormat } from "@/helpers/number-format.helper";
 import { Loading } from "@/components/Loading";
 import { useCountryDetails } from "@/hooks/country-details/useCountryDetails";
 import { useEffect } from "react";
+import { useTheme } from "styled-components";
 
 export const CountryDetails = () => {
+  const theme = useTheme();
   const { ccn3 } = useParams();
   const navigate = useNavigate();
+
   const { country, fetchData, isLoading } = useCountryDetails({
     ccn3,
   });
@@ -22,8 +25,13 @@ export const CountryDetails = () => {
 
   const generateMetaData = (key: string, value: string) => {
     return (
-      <Typograph marginBottom={6} variant="body-2" color="#dae1e7">
-        {key}: <span style={{ color: "#b8bfc6" }}>{value}</span>
+      <Typograph
+        marginBottom={6}
+        variant="body-2"
+        fontWeight={500}
+        color={theme.color.secondary.contrastText}
+      >
+        {key}: <span style={{ fontWeight: 300 }}>{value}</span>
       </Typograph>
     );
   };
@@ -57,9 +65,22 @@ export const CountryDetails = () => {
 
       {country && (
         <ContentWrapper>
-          <img width={400} height={200} src={country.flags.svg} alt="country" />
+          <img
+            style={{
+              objectFit: "cover",
+            }}
+            width={400}
+            height={200}
+            src={country.flags.svg}
+            alt="country"
+          />
           <div>
-            <Typograph fontSize={28} fontWeight={600} marginBottom={16}>
+            <Typograph
+              color={theme.color.primary.contrastText}
+              fontSize={28}
+              fontWeight={600}
+              marginBottom={16}
+            >
               {country.translations.por.common}
             </Typograph>
             <MetaDataContainer>

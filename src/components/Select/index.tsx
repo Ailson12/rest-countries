@@ -58,7 +58,7 @@ export const Select: FC<Props> = ({ title, value, onChange, options }) => {
           {optionSelected?.legend ?? title}
         </Typograph>
         {value?.length && (
-          <CloseIconWrapper onClick={clearValue}>
+          <CloseIconWrapper type="button" onClick={clearValue}>
             <img src={closeIcon} alt="close icon" height={20} width={20} />
           </CloseIconWrapper>
         )}

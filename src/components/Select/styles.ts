@@ -19,6 +19,7 @@ export const Anchor = styled.div(
 export const CloseIconWrapper = styled.button({
   padding: 0,
   border: 0,
+  display: 'flex',
   background: "none",
   cursor: "pointer",
 });
@@ -53,7 +54,7 @@ export const OptionItem = styled.li<{
     "&:hover": {
       background: theme.border.cp1,
     },
-    backgroundColor: $isActive ? "#3f5364" : "",
+    backgroundColor: $isActive ? theme.border.cp1: "",
   })
 );
 

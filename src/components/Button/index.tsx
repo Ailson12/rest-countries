@@ -8,7 +8,7 @@ type Props = HTMLAttributes<HTMLButtonElement> & {
 
 export const Button: FC<Props> = ({ appendIcon, children, ...props }) => {
   return (
-    <ButtonWrapper {...props}>
+    <ButtonWrapper type="button" {...props}>
       {appendIcon}
       {children}
     </ButtonWrapper>
