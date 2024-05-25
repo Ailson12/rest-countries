@@ -2,15 +2,16 @@ import { useTheme } from "styled-components";
 import { Container } from "../Container";
 import { Typograph } from "../Typograph";
 import { Button } from "../Button";
-import { useThemeStore } from "@/store/useTheme.store";
+import { useThemeStore } from "@/store/theme.store";
 import { ThemeEnum } from "@/enums/ThemeEnum";
 
 export const Navbar = () => {
   const { color } = useTheme();
   const { setTheme, theme } = useThemeStore();
 
+  const { DARK, LIGHT } = ThemeEnum;
+
   const toggleTheme = () => {
-    const { DARK, LIGHT } = ThemeEnum;
     setTheme(theme === DARK ? LIGHT : DARK);
   };
 
@@ -33,7 +34,9 @@ export const Navbar = () => {
         >
           Em que parte do mundo?
         </Typograph>
-        <Button onClick={toggleTheme}>Alterar tema</Button>
+        <Button onClick={toggleTheme}>
+          Ativar Modo {theme === DARK ? "Claro" : "Escuro"}
+        </Button>
       </Container>
     </div>
   );
