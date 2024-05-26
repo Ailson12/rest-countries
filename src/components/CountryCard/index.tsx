@@ -3,6 +3,7 @@ import { Typograph } from "../Typograph";
 import { numberFormat } from "@/helpers/number-format.helper";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "styled-components";
+import { CountryCardWrapper } from "./styles";
 
 type Props = HTMLAttributes<HTMLButtonElement> & {
   name: string;
@@ -44,19 +45,11 @@ export const CountryCard: FC<Props> = ({
   };
 
   return (
-    <button
-      {...props}
-      style={{
-        width: "max-content",
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: color.secondary.main,
-      }}
-      onClick={redirectDetails}
-    >
+    <CountryCardWrapper type="button" {...props} onClick={redirectDetails}>
       <img
         style={{
           objectFit: "cover",
+          width: "100%",
         }}
         src={image.url}
         alt={name}
@@ -77,6 +70,6 @@ export const CountryCard: FC<Props> = ({
         {generateMetaData("Região", region)}
         {generateMetaData("Capital", capital)}
       </div>
-    </button>
+    </CountryCardWrapper>
   );
 };
